@@ -2,6 +2,90 @@ import 'package:flutter/material.dart';
 
 import '../models/message_models.dart';
 
+class CenterBlank extends StatefulWidget {
+  @override
+  State<CenterBlank> createState() => _CenterBlankState();
+}
+
+class _CenterBlankState extends State<CenterBlank> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey.shade300,
+      child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          height: 20,
+          width: 250,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            "Select a chat to start messageing",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CenterScreen extends StatefulWidget {
+  @override
+  State<CenterScreen> createState() => _CenterScreenState();
+}
+
+class _CenterScreenState extends State<CenterScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade300,
+      body: Column(
+        children: [
+          Expanded(
+            flex: 10,
+            child: Container(
+              color: Colors.grey.shade300,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 1,
+              ),
+              height: 50,
+              margin: EdgeInsets.all(0),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  suffix: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.send,
+                    ),
+                  ),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+Widget theCenter = CenterBlank();
+
 class TabletLayout extends StatefulWidget {
   @override
   State<TabletLayout> createState() => _TabletLayoutState();
@@ -48,6 +132,11 @@ class _TabletLayoutState extends State<TabletLayout> {
                     itemCount: theMessages.length,
                     itemBuilder: (context, index) {
                       return ListTile(
+                        onTap: () {
+                          setState(() {
+                            theCenter = CenterScreen();
+                          });
+                        },
                         title: Text(
                             "${theMessages[index].sender.firstName} ${theMessages[index].sender.lastName}"),
                         subtitle: Text("${theMessages[index].theText}"),
@@ -112,12 +201,7 @@ class _TabletLayoutState extends State<TabletLayout> {
               ],
             ),
           ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              color: Colors.grey,
-            ),
-          ),
+          Expanded(flex: 3, child: theCenter),
         ],
       ),
     );

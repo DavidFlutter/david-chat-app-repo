@@ -1,4 +1,5 @@
 import 'package:david_chat_app/models/message_models.dart';
+import 'package:david_chat_app/pages/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class MobileLayout extends StatefulWidget {
@@ -43,6 +44,13 @@ class _MobileLayoutState extends State<MobileLayout> {
               itemCount: theMessages.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Chatscrenn(),
+                        ));
+                  },
                   title: Text(
                       "${theMessages[index].sender.firstName} ${theMessages[index].sender.lastName}"),
                   subtitle: Text("${theMessages[index].theText}"),
