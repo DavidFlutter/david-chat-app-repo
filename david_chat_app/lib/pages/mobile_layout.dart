@@ -48,7 +48,8 @@ class _MobileLayoutState extends State<MobileLayout> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Chatscrenn(),
+                          builder: (context) =>
+                              Chatscrenn(theMessages[index].sender),
                         ));
                   },
                   title: Text(
@@ -100,12 +101,24 @@ class _MobileLayoutState extends State<MobileLayout> {
                             ],
                           ),
                   ),
-                  trailing: Icon(
-                    Icons.star_rounded,
-                    size: 15,
-                    color: theMessages[index].sender.isProUser
-                        ? Colors.yellow
-                        : Colors.grey,
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(
+                        Icons.star_rounded,
+                        size: 15,
+                        color: theMessages[index].sender.isProUser
+                            ? Colors.yellow
+                            : Colors.grey,
+                      ),
+                      Text(
+                        theMessages[index].timeSent,
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               },

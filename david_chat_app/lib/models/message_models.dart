@@ -30,10 +30,10 @@ List<Message> messages = [
     timeSent: "8:20 pm",
   ),
   Message(
-    isRead: true,
-    sender: users[2],
-    theText: "Thank God for His mercy",
-  ),
+      isRead: true,
+      sender: users[2],
+      theText: "Thank God for His mercy",
+      timeSent: "8:03 pm"),
   Message(
     isRead: false,
     sender: users[3],
@@ -50,6 +50,7 @@ List<Message> messages = [
     isRead: true,
     sender: users[5],
     theText: "There is strength for you",
+    timeSent: "6:54 pm",
   ),
   Message(
     isRead: false,
@@ -67,6 +68,7 @@ List<Message> messages = [
     isRead: true,
     sender: users[8],
     theText: "Thank you for the cash",
+    timeSent: "8:12 am",
   ),
   Message(
     isRead: false,
@@ -84,5 +86,6 @@ List<Message> messages = [
     isRead: true,
     sender: users[11],
     theText: "For you",
+    timeSent: "6:45 am",
   ),
 ];

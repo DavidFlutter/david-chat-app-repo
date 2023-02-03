@@ -4,6 +4,8 @@ import 'package:david_chat_app/pages/responsive_layout.dart';
 import 'package:david_chat_app/pages/tablet_layout.dart';
 import 'package:flutter/material.dart';
 
+import 'pages/chat_screen.dart';
+
 void main() {
   runApp(MyApp());
 }

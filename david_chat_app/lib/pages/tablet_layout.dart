@@ -34,6 +34,9 @@ class _CenterBlankState extends State<CenterBlank> {
 }
 
 class CenterScreen extends StatefulWidget {
+  var sender;
+
+  CenterScreen(this.sender);
   @override
   State<CenterScreen> createState() => _CenterScreenState();
 }
@@ -45,6 +48,55 @@ class _CenterScreenState extends State<CenterScreen> {
       backgroundColor: Colors.grey.shade300,
       body: Column(
         children: [
+          Container(
+            color: Colors.grey.shade400,
+            height: 50,
+            width: double.infinity,
+            child: Row(
+              children: [
+                SizedBox(width: 10),
+                Container(
+                  width: 3,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: widget.sender.isOnline
+                      ? [
+                          Text(
+                            "${widget.sender.firstName} ${widget.sender.lastName}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.white),
+                          ),
+                          Text(
+                            "online",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12,
+                                color: Colors.white),
+                          ),
+                        ]
+                      : [
+                          Text(
+                            "${widget.sender.firstName} ${widget.sender.lastName}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: Colors.white),
+                          ),
+                        ],
+                )
+              ],
+            ),
+          ),
           Expanded(
             flex: 10,
             child: Container(
@@ -122,6 +174,7 @@ class _TabletLayoutState extends State<TabletLayout> {
       backgroundColor: Colors.white,
       body: Row(
         children: [
+          // Messages list
           Expanded(
             flex: 2,
             child: Column(
@@ -134,7 +187,7 @@ class _TabletLayoutState extends State<TabletLayout> {
                       return ListTile(
                         onTap: () {
                           setState(() {
-                            theCenter = CenterScreen();
+                            theCenter = CenterScreen(theMessages[index].sender);
                           });
                         },
                         title: Text(
@@ -201,6 +254,7 @@ class _TabletLayoutState extends State<TabletLayout> {
               ],
             ),
           ),
+          // Chatscreen
           Expanded(flex: 3, child: theCenter),
         ],
       ),
