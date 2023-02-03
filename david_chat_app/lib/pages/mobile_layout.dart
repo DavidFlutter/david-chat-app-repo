@@ -32,13 +32,31 @@ class _MobileLayoutState extends State<MobileLayout> {
   Widget build(BuildContext context) {
     List theMessages = messages;
     return Scaffold(
-      appBar: AppBar(
-        title: Text("2Ter Hub Chat"),
-      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 10),
+          // Searchbar
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 7,
+              ),
+              height: 40,
+              margin: EdgeInsets.all(0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: "Search",
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: theMessages.length,

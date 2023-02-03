@@ -16,7 +16,7 @@ class _ChatscrennState extends State<Chatscrenn> {
       body: Column(
         children: [
           Container(
-            color: Colors.grey.shade400,
+            color: Colors.deepPurple,
             height: 50,
             width: double.infinity,
             child: Row(
@@ -60,7 +60,19 @@ class _ChatscrennState extends State<Chatscrenn> {
                                 color: Colors.white),
                           ),
                         ],
-                )
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: (() {
+                    Navigator.pop(context);
+                  }),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                    size: 17,
+                  ),
+                ),
+                SizedBox(width: 0),
               ],
             ),
           ),
@@ -69,14 +81,7 @@ class _ChatscrennState extends State<Chatscrenn> {
             child: Container(
               alignment: Alignment.center,
               color: Colors.grey.shade300,
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: (() {
-                    Navigator.pop(context);
-                  }),
-                  child: Text("Back"),
-                ),
-              ),
+              child: Center(),
             ),
           ),
           //
@@ -88,7 +93,7 @@ class _ChatscrennState extends State<Chatscrenn> {
                 horizontal: 10,
                 vertical: 1,
               ),
-              height: 50,
+              height: 40,
               margin: EdgeInsets.all(0),
               width: double.infinity,
               decoration: BoxDecoration(
@@ -97,11 +102,17 @@ class _ChatscrennState extends State<Chatscrenn> {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  suffix: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.send,
-                    ),
+                  suffix: Column(
+                    children: [
+                      SizedBox(height: 5),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.send,
+                          color: Colors.deepPurple,
+                        ),
+                      ),
+                    ],
                   ),
                   border: InputBorder.none,
                 ),

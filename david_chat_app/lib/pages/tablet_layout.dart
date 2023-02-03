@@ -49,7 +49,7 @@ class _CenterScreenState extends State<CenterScreen> {
       body: Column(
         children: [
           Container(
-            color: Colors.grey.shade400,
+            color: Colors.deepPurple,
             height: 50,
             width: double.infinity,
             child: Row(
@@ -110,7 +110,7 @@ class _CenterScreenState extends State<CenterScreen> {
                 horizontal: 10,
                 vertical: 1,
               ),
-              height: 50,
+              height: 40,
               margin: EdgeInsets.all(0),
               width: double.infinity,
               decoration: BoxDecoration(
@@ -123,6 +123,7 @@ class _CenterScreenState extends State<CenterScreen> {
                     onPressed: () {},
                     icon: Icon(
                       Icons.send,
+                      color: Colors.deepPurple,
                     ),
                   ),
                   border: InputBorder.none,
@@ -168,9 +169,6 @@ class _TabletLayoutState extends State<TabletLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("2Ter Hub Chat"),
-      ),
       backgroundColor: Colors.white,
       body: Row(
         children: [
@@ -179,7 +177,27 @@ class _TabletLayoutState extends State<TabletLayout> {
             flex: 2,
             child: Column(
               children: [
-                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 7,
+                    ),
+                    height: 40,
+                    margin: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: theMessages.length,
@@ -192,7 +210,10 @@ class _TabletLayoutState extends State<TabletLayout> {
                         },
                         title: Text(
                             "${theMessages[index].sender.firstName} ${theMessages[index].sender.lastName}"),
-                        subtitle: Text("${theMessages[index].theText}"),
+                        subtitle: Text(
+                          "${theMessages[index].theText}",
+                          style: TextStyle(overflow: TextOverflow.ellipsis),
+                        ),
                         leading: GestureDetector(
                           onTap: () {
                             showProfilePic(
@@ -240,12 +261,24 @@ class _TabletLayoutState extends State<TabletLayout> {
                                   ],
                                 ),
                         ),
-                        trailing: Icon(
-                          Icons.star_rounded,
-                          size: 15,
-                          color: theMessages[index].sender.isProUser
-                              ? Colors.yellow
-                              : Colors.grey,
+                        trailing: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              Icons.star_rounded,
+                              size: 15,
+                              color: theMessages[index].sender.isProUser
+                                  ? Colors.yellow
+                                  : Colors.grey,
+                            ),
+                            Text(
+                              theMessages[index].timeSent,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     },

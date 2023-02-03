@@ -49,7 +49,7 @@ class _CenterScreenState extends State<CenterScreen> {
       body: Column(
         children: [
           Container(
-            color: Colors.grey.shade400,
+            color: Colors.deepPurple,
             height: 50,
             width: double.infinity,
             child: Row(
@@ -110,7 +110,7 @@ class _CenterScreenState extends State<CenterScreen> {
                 horizontal: 10,
                 vertical: 1,
               ),
-              height: 50,
+              height: 40,
               margin: EdgeInsets.all(0),
               width: double.infinity,
               decoration: BoxDecoration(
@@ -123,6 +123,7 @@ class _CenterScreenState extends State<CenterScreen> {
                     onPressed: () {},
                     icon: Icon(
                       Icons.send,
+                      color: Colors.deepPurple,
                     ),
                   ),
                   border: InputBorder.none,
@@ -174,9 +175,6 @@ class _DesktopLayoutState extends State<DesktopLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("2Ter Hub Chat"),
-      ),
       backgroundColor: Colors.white,
       body: Row(
         children: [
@@ -185,7 +183,27 @@ class _DesktopLayoutState extends State<DesktopLayout> {
             flex: 3,
             child: Column(
               children: [
-                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 7,
+                    ),
+                    height: 40,
+                    margin: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   child: ListView.builder(
                     itemCount: theMessages.length,
@@ -205,7 +223,10 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                         },
                         title: Text(
                             "${theMessages[index].sender.firstName} ${theMessages[index].sender.lastName}"),
-                        subtitle: Text("${theMessages[index].theText}"),
+                        subtitle: Text(
+                          "${theMessages[index].theText}",
+                          style: TextStyle(overflow: TextOverflow.ellipsis),
+                        ),
                         leading: GestureDetector(
                           onTap: () {
                             showProfilePic(
@@ -253,12 +274,24 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                                   ],
                                 ),
                         ),
-                        trailing: Icon(
-                          Icons.star_rounded,
-                          size: 15,
-                          color: theMessages[index].sender.isProUser
-                              ? Colors.yellow
-                              : Colors.grey,
+                        trailing: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              Icons.star_rounded,
+                              size: 15,
+                              color: theMessages[index].sender.isProUser
+                                  ? Colors.yellow
+                                  : Colors.grey,
+                            ),
+                            Text(
+                              theMessages[index].timeSent,
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     },
@@ -302,12 +335,18 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                     subtitle: Text(userLastName),
                   ),
                   ListTile(
-                    leading: Icon(Icons.phone),
+                    leading: Icon(
+                      Icons.phone,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("Phone:"),
                     subtitle: Text(userPhoneNumber),
                   ),
                   ListTile(
-                    leading: Icon(Icons.email),
+                    leading: Icon(
+                      Icons.email,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("Email:"),
                     subtitle: Text(userEmail),
                   ),
@@ -319,19 +358,31 @@ class _DesktopLayoutState extends State<DesktopLayout> {
                     height: 50,
                   ),
                   ListTile(
-                    leading: Icon(Icons.settings),
+                    leading: Icon(
+                      Icons.settings,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("Settings"),
                   ),
                   ListTile(
-                    leading: Icon(Icons.edit),
+                    leading: Icon(
+                      Icons.edit,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("Edit profile"),
                   ),
                   ListTile(
-                    leading: Icon(Icons.person),
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("View pofile"),
                   ),
                   ListTile(
-                    leading: Icon(Icons.groups),
+                    leading: Icon(
+                      Icons.groups,
+                      color: Colors.deepPurple,
+                    ),
                     title: Text("Communities"),
                   ),
                 ],
