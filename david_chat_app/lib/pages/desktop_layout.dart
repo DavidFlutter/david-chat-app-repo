@@ -35,6 +35,7 @@ class _CenterBlankState extends State<CenterBlank> {
 
 class CenterScreen extends StatefulWidget {
   var sender;
+  List<String> myMessages = [];
 
   CenterScreen(this.sender);
   @override
@@ -42,6 +43,7 @@ class CenterScreen extends StatefulWidget {
 }
 
 class _CenterScreenState extends State<CenterScreen> {
+  var myTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,7 +102,46 @@ class _CenterScreenState extends State<CenterScreen> {
           Expanded(
             flex: 10,
             child: Container(
+              padding: EdgeInsets.all(10),
+              alignment: Alignment.center,
               color: Colors.grey.shade300,
+              child: ListView.builder(
+                itemCount: widget.myMessages.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 200),
+                          padding: EdgeInsets.all(5),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.myMessages[index]),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.purple.shade300,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           Padding(
@@ -118,9 +159,15 @@ class _CenterScreenState extends State<CenterScreen> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextField(
+                controller: myTextController,
                 decoration: InputDecoration(
                   suffix: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        widget.myMessages.add(myTextController.text);
+                        myTextController.clear();
+                      });
+                    },
                     icon: Icon(
                       Icons.send,
                       color: Colors.deepPurple,

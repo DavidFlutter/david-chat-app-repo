@@ -1,7 +1,10 @@
+import 'package:david_chat_app/main.dart';
+import 'package:david_chat_app/models/message_models.dart';
 import "package:flutter/material.dart";
 
 class Chatscrenn extends StatefulWidget {
   var sender;
+  List<String> myMessages = [];
 
   Chatscrenn(this.sender);
   @override
@@ -9,6 +12,7 @@ class Chatscrenn extends StatefulWidget {
 }
 
 class _ChatscrennState extends State<Chatscrenn> {
+  var myTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,15 +83,52 @@ class _ChatscrennState extends State<Chatscrenn> {
           Expanded(
             flex: 10,
             child: Container(
+              padding: EdgeInsets.all(10),
               alignment: Alignment.center,
               color: Colors.grey.shade300,
-              child: Center(),
+              child: ListView.builder(
+                itemCount: widget.myMessages.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          constraints: BoxConstraints(maxWidth: 200),
+                          padding: EdgeInsets.all(5),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.myMessages[index]),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.purple.shade300,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           //
           //Bottom text input
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(0),
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
@@ -101,15 +142,21 @@ class _ChatscrennState extends State<Chatscrenn> {
                 borderRadius: BorderRadius.circular(30),
               ),
               child: TextField(
+                controller: myTextController,
                 decoration: InputDecoration(
                   suffix: Column(
                     children: [
-                      SizedBox(height: 5),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            widget.myMessages.add(myTextController.text);
+                            myTextController.clear();
+                          });
+                        },
                         icon: Icon(
                           Icons.send,
                           color: Colors.deepPurple,
+                          size: 20,
                         ),
                       ),
                     ],
